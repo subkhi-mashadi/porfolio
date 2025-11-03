@@ -13,14 +13,13 @@ class PortfolioController extends Controller
      */
     protected function getProfileData()
     {
-        // Ambil data pertama (dan satu-satunya)
         return AboutMe::first();
     }
     public function index()
     {
         $categories = Category::withCount('projects')->get();
         $projects = Project::with('category')->latest()->paginate(9);
-        $profile = $this->getProfileData(); // Ambil data profil
+        $profile = $this->getProfileData();
 
         return view('portfolio.index', compact('projects', 'categories', 'profile'));
     }
@@ -47,5 +46,11 @@ class PortfolioController extends Controller
         $categories = Category::withCount('projects')->get(); // Untuk sidebar/filter
 
         return view('portfolio.category', compact('projects', 'category', 'categories'));
+    }
+    public function services()
+    {
+        $profile = $this->getProfileData();
+
+        return view('portfolio.services', compact('profile'));
     }
 }

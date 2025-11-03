@@ -48,12 +48,18 @@
                         Galeri Foto / Video
                     </li>
                 </ul>
-
-                <a href="mailto:emailanda@example.com"
+            @if ($profile->phone)
+            @php
+                $phone = preg_replace('/[^0-9]/', '', $profile->phone);
+                $whatsappUrl = 'https://wa.me/' . $phone;
+            @endphp
+                   
+                <a href="{{ $whatsappUrl }}"
                    class="block text-center bg-indigo-600 text-white py-2.5 rounded-full font-semibold hover:bg-indigo-700 transition">
                     Pesan Sekarang
                 </a>
             </div>
+             @endif
 
             {{-- Card 2: E-Commerce --}}
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 hover:-translate-y-2 hover:shadow-2xl transition-transform duration-300 group">
